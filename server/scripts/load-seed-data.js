@@ -16,15 +16,16 @@ Promise.all(
     return Promise.all(
       superfoods.map(superfood => {
         return client.query(`
-          INSERT INTO superfoods (name, health_category_id, benefits)
+          INSERT INTO superfoods (name, health_category_id, benefits, is_anti_inflammatory)
             SELECT 
               $1 as name,
               id as health_category_id, 
-              $2 as benefits
+              $2 as benefits,
+              $4 as is_anti_inflammatory
             FROM health_category
             WHERE short_name = $3;
         `,
-        [superfood.name, superfood.benefits, superfood.health_category]);
+        [superfood.name, superfood.benefits, superfood.health_category, superfood.is_anti_inflammatory]);
       })
     );
   })

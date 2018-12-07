@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get('/api/superfoods', (req, res) => {
   client.query(`
-    SELECT id, name, is_anti_inflammatory FROM superfoods;
+    SELECT * FROM superfoods;
   `)
     .then(result => {
       res.json(result.rows);

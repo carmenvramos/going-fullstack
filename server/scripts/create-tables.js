@@ -11,7 +11,8 @@ client.query(`
     id SERIAL PRIMARY KEY,
     name VARCHAR(256) NOT NULL,
     health_category_id INTEGER NOT NULL REFERENCES health_category(id),
-    benefits VARCHAR(256)
+    benefits VARCHAR(256),
+    is_anti_inflammatory BOOLEAN
   );
 
 `)

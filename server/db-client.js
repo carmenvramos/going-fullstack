@@ -1,5 +1,5 @@
 const pg = require('pg');
-const DATABASE_URL = 'postgres://localhost:5432/school';
+const DATABASE_URL = 'postgres://localhost:5432/foods';
 const Client = pg.Client;
 const client = new Client(DATABASE_URL);
 

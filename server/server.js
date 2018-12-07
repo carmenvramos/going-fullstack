@@ -1,23 +1,15 @@
 const express = require('express');
 const app = express();
-const pg = require('pg');
+const client = require('./db-client');
 
 // register the json "middleware" body parser
 app.use(express.json());
 
-/* Connect to pg */
-const Client = pg.Client;
-const dbUrl = 'postgres://localhost:5432/foods';
-const client = new Client(dbUrl);
-client.connect();
-/* end connect pg */
-
 /* Defined routes: METHOD, URL PATH */
-
 // method == app.<method>
 // path = app.get('/this/is/path', ...)
-app.get('/api/superfoods', (req, res) => {
 
+app.get('/api/superfoods', (req, res) => {
   client.query(`
     SELECT id, name, is_anti_inflammatory FROM superfoods;
   `)

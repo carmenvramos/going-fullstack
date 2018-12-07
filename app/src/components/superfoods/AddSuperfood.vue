@@ -11,7 +11,7 @@
       </label>    
       <label>
         <span>Anti-Inflammatory:</span>    
-          <input v-model="superfood.anti_inflammatory" type="checkbox">
+          <input v-model="superfood.is_anti_inflammatory" type="checkbox">
       </label>    
       <button>Add</button>
     </fieldset>  
@@ -30,7 +30,7 @@ export default {
       superfood: {
         name: update.name || '',
         benefits: update.benefits || '',
-        anti_inflammatory: update.ant_inflammatory || false
+        is_anti_inflammatory: false
       }
     };
   },

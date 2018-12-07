@@ -45,7 +45,7 @@ ul {
 }
 p {
   font-size: 1.15em;
-  font-weigth: bolder;
+  font-weight: bolder;
   color: green;
 }
 .superfoods {

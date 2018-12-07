@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
+// const morgan = require('morgan');
 const client = require('./db-client');
+
+// enhanced logging
+// app.use(morgan('dev'));
 
 // register the json "middleware" body parser
 app.use(express.json());
@@ -9,9 +13,28 @@ app.use(express.json());
 // method == app.<method>
 // path = app.get('/this/is/path', ...)
 
+app.get('/api/health_category', (req, res) => {
+  client.query(`
+    SELECT id, name, short_name as "shortName"
+    FROM health_category
+    ORDER BY name
+  `)
+    .then(result => {
+      res.json(result.rows);
+    });
+});
+
 app.get('/api/superfoods', (req, res) => {
   client.query(`
-    SELECT * FROM superfoods;
+    SELECT 
+      superfoods.id,
+      superfoods.name as name,
+      health_category.id  as "healthCategoryId",
+      health_category.name as health_category
+    FROM superfoods
+    JOIN health_category
+    ON superfoods.health_category_id = health_category.id
+    ORDER BY name   
   `)
     .then(result => {
       res.json(result.rows);

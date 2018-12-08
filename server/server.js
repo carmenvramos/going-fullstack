@@ -30,7 +30,7 @@ app.get('/api/superfoods', (req, res) => {
       superfoods.id,
       superfoods.name as name,
       health_category.id  as "healthCategoryId",
-      health_category.name as health_category
+      health_category.short_name as health_category
     FROM superfoods
     JOIN health_category
     ON superfoods.health_category_id = health_category.id

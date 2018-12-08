@@ -1,7 +1,8 @@
 <template>
     <ul  v-if="superfoods">
       <li class="superfoods" v-for="superfood in superfoods" :key="superfood.id">
-        <RouterLink :to="`/superfoods/${superfood.id}`">{{superfood.name}}</RouterLink>
+        <RouterLink class="name" :to="`/superfoods/${superfood.id}`"> {{superfood.name}}</RouterLink>
+        is good for your {{superfood.health_category}} health
       </li>
     </ul>
 </template>
@@ -19,4 +20,9 @@ a {
   color: green;
   font-size: 1.00em;
 }
+.name {
+  font-size: 1.1em;
+  font-weight: bolder;
+}
+
 </style>

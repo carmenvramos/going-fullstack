@@ -56,11 +56,11 @@ app.post('/api/superfoods', (req, res) => {
   const body = req.body;
 
   client.query(`
-    INSERT INTO superfoods (name, benefits, is_anti_inflammatory)
-    VALUES($1, $2, $3)
-    RETURNING id, name, benefits, is_anti_inflammatory;
+    INSERT INTO superfoods (name, benefits, is_anti_inflammatory, health_category_id)
+    VALUES($1, $2, $3, $4)
+    RETURNING id, name, benefits, is_anti_inflammatory, health_category_id;
   `,
-  [body.name, body.benefits, body.is_anti_inflammatory])
+  [body.name, body.benefits, body.is_anti_inflammatory, body.health_category])
     .then(result => {
       res.json(result.rows[0]);
     });

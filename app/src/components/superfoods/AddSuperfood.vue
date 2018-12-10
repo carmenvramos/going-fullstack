@@ -12,7 +12,18 @@
       <label>
         <span>Anti-Inflammatory:</span>    
           <input v-model="superfood.is_anti_inflammatory" type="checkbox">
-      </label>    
+      </label> 
+      <label> 
+        <span>Health Category:</span> 
+      <select v-model="superfood.health_category">
+        <option value="1">Cancer</option>
+        <option value="2">Heart and Cardiovascular</option>
+        <option value="3">Brain</option>
+        <option value="4">Skin and Hair</option>
+        <option value="5">Weight Loss</option>
+        <option value="6">Immune System</option>
+      </select> 
+      </label>
       <button>Add</button>
     </fieldset>  
   </form>

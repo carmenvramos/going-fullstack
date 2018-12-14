@@ -69,7 +69,12 @@ app.post('/api/superfoods', (req, res) => {
   client.query(`
     INSERT INTO superfoods (name, benefits, is_anti_inflammatory, health_category_id)
     VALUES($1, $2, $3, $4)
-    RETURNING id, name, benefits, is_anti_inflammatory, health_category_id;
+    RETURNING 
+    id, 
+    name, 
+    benefits, 
+    is_anti_inflammatory as "isAntiInflammatory", 
+    health_category_id as "healthCategoryId";
   `,
   [body.name, body.benefits, body.isAntiInflammatory, body.healthCategoryId])
     .then(result => {

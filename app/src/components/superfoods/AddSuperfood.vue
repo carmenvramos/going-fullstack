@@ -11,11 +11,11 @@
       </label>    
       <label>
         <span>Anti-Inflammatory:</span>    
-          <input v-model="superfood.is_anti_inflammatory" type="checkbox">
+          <input v-model="superfood.isAntiInflammatory" type="checkbox">
       </label> 
       <label> 
         <span>Health Category:</span> 
-      <select v-model="superfood.health_category">
+      <select v-model="superfood.healthCategoryId">
         <option value="1">Cancer</option>
         <option value="2">Heart and Cardiovascular</option>
         <option value="3">Brain</option>
@@ -41,7 +41,8 @@ export default {
       superfood: {
         name: update.name || '',
         benefits: update.benefits || '',
-        is_anti_inflammatory: false
+        isAntiInflammatory: false, 
+        healthCategoryId: update.healthCategoryId
       }
     };
   },

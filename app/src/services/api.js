@@ -19,5 +19,23 @@ export default {
       body: JSON.stringify(superfood)
     })
       .then(response => response.json());
+  },
+
+  updateSuperfood(superfood) {
+    return fetch(`/api/superfoods/${superfood.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(superfood)
+    })
+      .then(response => response.json());  
+  },
+
+  deleteSuperfood(id) {
+    return fetch(`/api/superfoods/${id}`, {
+      method: 'DELETE'
+    })
+      .then(response => response.json());
   }
 };

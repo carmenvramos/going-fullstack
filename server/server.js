@@ -30,7 +30,7 @@ app.get('/api/superfoods', (req, res) => {
       superfoods.id,
       superfoods.name as name,
       health_category.id  as "healthCategoryId",
-      health_category.short_name as health_category
+      health_category.short_name as "healthCategory"
     FROM superfoods
     JOIN health_category
     ON superfoods.health_category_id = health_category.id
@@ -52,6 +52,17 @@ app.get('/api/superfoods/:id', (req, res) => {
     });
 });
 
+app.delete('/api/superfoods/:id', (req, res) => {
+  client.query(`
+    DELETE FROM superfoods
+    WHERE id = $1;
+  `,
+  [req.params.id])
+    .then(result => {
+      res.json({ remove:result.rowCount });
+    });
+});
+
 app.post('/api/superfoods', (req, res) => {
   const body = req.body;
 
@@ -60,7 +71,30 @@ app.post('/api/superfoods', (req, res) => {
     VALUES($1, $2, $3, $4)
     RETURNING id, name, benefits, is_anti_inflammatory, health_category_id;
   `,
-  [body.name, body.benefits, body.is_anti_inflammatory, body.health_category])
+  [body.name, body.benefits, body.isAntiInflammatory, body.healthCategoryId])
+    .then(result => {
+      res.json(result.rows[0]);
+    });
+});
+
+app.put('/api/superfoods/:id', (req, res) => {
+  const body = req.body;
+  client.query(`
+    UPDATE superfoods
+    SET
+      name = $1,
+      benefits = $2,
+      is_anti_inflammatory = $3,
+      health_category_id = $4
+    WHERE id = $5
+    RETURNING
+      id,
+      name,
+      benefits,
+      is_anti_inflammatory as "isAntiInflammatory",
+      health_category_id as "healthCategoryId"
+  `,
+  [body.name, body.benefits, body.isAntiInflammatory, body.healthCategoryId, req.params.id])
     .then(result => {
       res.json(result.rows[0]);
     });

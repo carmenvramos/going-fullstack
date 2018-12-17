@@ -7,6 +7,7 @@
     <p v-if="superfood.is_anti_inflammatory === true ">
      This superfood is anti-inflammatory!
     </p>
+    <button @click="handleRemove">🗑 Remove</button> 
   </section>
 </template>
 
@@ -24,6 +25,9 @@ export default {
       .then(superfood => {
         this.superfood = superfood;
       });
+  }, 
+  methods: {
+    
   }
 };
 </script>

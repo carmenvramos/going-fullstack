@@ -3,7 +3,7 @@
       <li class="superfoods" v-for="superfood in superfoods" :key="superfood.id">
         <RouterLink class="name" :to="`/superfoods/${superfood.id}`"> {{superfood.name}}</RouterLink>
         is good for your 
-        <span class="category"> {{superfood.health_category}} </span> health
+        <span class="category"> {{superfood.healthCategory}} </span> health
       </li>
     </ul>
 </template>

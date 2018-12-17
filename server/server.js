@@ -78,6 +78,25 @@ app.post('/api/superfoods', (req, res) => {
   `,
   [body.name, body.benefits, body.isAntiInflammatory, body.healthCategoryId])
     .then(result => {
+      const id = result.rows[0].id;
+      
+      return client.query(`
+        SELECT 
+          superfoods.id, 
+          superfoods.name, 
+          superfoods.benefits,
+          superfoods.is_anti_inflammatory as "isAntiInflammatory",
+          health_category.id as "healthCategoryId", 
+          health_category.short_name as "healthCategory"
+        FROM superfoods
+        JOIN health_category
+        ON superfoods.health_category_id = health_category.id 
+        WHERE superfoods.id = $1
+        ORDER BY name;
+      `,
+      [id]);
+    })
+    .then(result => {
       res.json(result.rows[0]);
     });
 });
